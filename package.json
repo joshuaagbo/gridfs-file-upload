@@ -1,0 +1,22 @@
+{
+  "name": "fileupload_with_gridfs",
+  "version": "1.0.0",
+  "description": "app to upload files to mongdb using multer and gridfs engine",
+  "main": "app",
+  "scripts": {
+    "start": "node app",
+    "dev": "nodemon app"
+  },
+  "author": "gemjosh",
+  "license": "MIT",
+  "dependencies": {
+    "connect-flash": "^0.1.1",
+    "express": "^4.16.4",
+    "express-session": "^1.15.6",
+    "gridfs-stream": "^1.1.1",
+    "mongoose": "^5.4.19",
+    "multer": "^1.4.1",
+    "multer-gridfs-storage": "^3.2.3",
+    "pug": "^2.0.3"
+  }
+}

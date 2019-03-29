@@ -1,0 +1,11 @@
+extends layout
+block content
+    .container
+        .card.p-3.mx-auto.mt-5(style="width: 70%;height: auto")
+            include ./messages/message
+            span.fas.fa-cloud-upload-alt.fa-4x.text-center.text-warning.my-2
+            form.form-group(method="post" action ="/file/add" enctype ="multipart/form-data")
+                input.form-control-file.my-2(type="file"  name="uploads")
+                button.fas.fa-arrow-right.fa-2x.btn.btn-sm.btn-dark.float-right.mr-2(type="submit")
+            a.btn-link.py-2(href="/")
+                span.fa.fa-arrow-left.fa-2x(title="go home")

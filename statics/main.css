@@ -1,0 +1,8 @@
+body {
+    background: #f1f1f1
+}
+
+.card {
+    box-shadow: 0px 0px 2px #ccc;
+    border: 0;
+}

@@ -1,0 +1,27 @@
+if VIDEOS
+  h2.btn.btn-block.bg-dark.text-white.mt-2 
+    a.nav-link.fas.fa-arrow-left.text-center.float-left(href="/") Home
+    span.display-4
+      span.fas.fa-fire.text-danger
+      span Latest Videos
+      span.fas.fa-fire.text-danger
+    a.nav-link.fas.fa-gallary-o.float-right(href="/images") Photos
+    .clearfix
+  .row.mt-3
+    for video, i in VIDEOS
+      .col-sm-6.col-md-4.col-lg-3.my-1
+        .card
+          a.nav-link(href="/detail/"+video.filename)
+            video.card-img(autoplay controls muted)
+              source(src=`/image/${video.filename}` type =`${video.contentType}`)
+          .row
+            .col-lg-4.col-md-4.col-sm-4
+              a.nav-link.fas.fa-download.text-secondary(href=`${video.filename}` downloadable)
+            .col-sm-4.co.col-md-4.col-lg-4
+              a.nav-link.fas.fa-share.text-warning(href=`/share/${video.filename}`)
+            .col-lg-4.col-md-4.col-sm-4
+              a.nav-link.fas.fa-heart.text-danger(href=`/like/${video._id}`)
+      
+if !VIDEOS
+  p
+    em No video available

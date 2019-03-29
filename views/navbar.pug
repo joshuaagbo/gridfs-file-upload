@@ -1,0 +1,21 @@
+.navbar.navbar-expand-md.sticky-top.bg-secondary.navbar-dark#Navbar
+    .container
+        a.navbar-brand.text-capitalize(href ="/") file uploader
+        form.form-inline.mx-auto
+            input.form-control.bg-dark.text-white.border-0(type="search" placeholder="find photos..." name="search")
+        button.navbar-toggler(data-toggle="collapse" data-target="#collapseMenu" )
+            span.navbar-toggler-icon
+        .collapse.navbar-collapse#collapseMenu
+            ul.navbar-nav.float-right.ml-auto
+                li.nav-item
+                    a.nav-link.text-capitalize(href ="/add") add               
+                li.nav-item
+                    a.nav-link.text-capitalize(href ="/images") image
+                li.nav-item
+                    a.nav-link.text-capitalize(href ="/videos") video
+                li.nav-item
+                    a.nav-link.text-capitalize(href ="/about") about
+                if user
+                    li.nav-item
+                        a.nav-link.text-capitalize(href ="/user/"+user._id) #{user.username}
+

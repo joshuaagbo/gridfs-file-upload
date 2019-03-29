@@ -1,0 +1,19 @@
+if IMAGES
+  h2.btn.btn-block.bg-dark.text-white.mt-2
+    a.nav-link.fas.fa-arrow-left.float-left(href="/") Home
+    span.display-4 Trending
+      span.fas.fa-fire.text-danger
+    a.nav-link.fas.fa-gallary-o.float-right(href="/videos") Video
+  .row
+    for image, i in IMAGES
+      .col-sm-6.col-md-4.col-lg-3.my-1
+        .card
+          a.nav-link.p-0(href="/detail/"+image.filename)
+            img.card-img(src=`/image/${image.filename}`)
+          .row
+            .col-lg-4.col-md-4.col-sm-4
+              a.nav-link.fas.fa-download.text-secondary(href=`${image.filename}` downloadable)
+            .col-sm-4.co.col-md-4.col-lg-4
+              a.nav-link.fas.fa-share.text-warning(href=`/share/${image.filename}`)
+            .col-lg-4.col-md-4.col-sm-4
+              a.nav-link.fas.fa-heart.text-danger(href=`/like/${image._id}`)

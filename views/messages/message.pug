@@ -1,0 +1,6 @@
+if  failure != ''
+    .alert.alert-dismissible.alert-danger.mt-3.text-center.fade.show #{failure}
+        button.close(data-dismiss ="alert") &times;
+if success != ''
+    .alert.alert-dismissible.alert-success.m-auto.text-center.fade.show #{success}
+        button.close(data-dismiss = "alert") &times;
