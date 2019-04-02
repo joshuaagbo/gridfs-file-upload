@@ -17,6 +17,9 @@ const conn = mongoose.createConnection(db, {
 conn.once("open", () => {
   gfs = Grid(conn.db, mongoose.mongo);
 });
+conn.on('err', (err) => {
+  console.log('MONGO_ERROR:: ', err);
+})
 
 const app = express();
 /******  MIDDLEWARES ******/
@@ -149,7 +152,7 @@ app.post("/file/add", (req, res, next) => {
   });
 });
 
-/******** APIS ROUTE ******/
+/******** APIs ******/
 // app.get("/api/image/:filename", (req, res, next) => {
 //   gfs.files.findOne({
 //       filename: req.params.filename
@@ -177,5 +180,5 @@ app.post("/file/add", (req, res, next) => {
 //     }
 //   });
 // });
-
+/****** END API ******/
 app.listen(port, () => console.log(`Server started at port ${port}`));

@@ -3,17 +3,21 @@ const mongoose = require("mongoose");
 const path = require("path");
 const gridFsStorage = require("multer-gridfs-storage");
 const db = require("./db").mongoURI;
+
+const url = mongoose.connect(db, {
+    useNewUrlParser: true
+  })
+  .then(() => console.log('GFS store connected...'))
+  .catch(err => console.log(err));
+// CREATE STORAGE ENGINE
 const storage = new gridFsStorage({
-  url: db,
+  url,
   file: (req, file) => {
-    // get filename
-    const title = file.originalname.split('.').slice(0, 1);
     return {
       title: title.toString(),
       filename: `${file.fieldname}_${new Date().getTime()} ${path.extname(
         file.originalname
       )}`
-
     };
   }
 });
@@ -29,7 +33,7 @@ const uploads = multer({
 checkType = (file, cb) => {
   const type = /jpg|jpeg|png|gif|mp3|mp4/;
   const extname = type.test(
-    path.extname(file.originalname).toLocaleLowerCase()
+    path.extname(file.originalname).toLowerCase()
   );
   const mimetype = type.test(file.mimetype);
   if (extname && mimetype) {
