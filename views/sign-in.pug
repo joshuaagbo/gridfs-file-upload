@@ -1,0 +1,22 @@
+extends layout
+block content
+  .container-fluid
+    .card
+      .card-body.m-auto
+        h2.text-center
+          span.fas.fa-user
+        form.form-group(action="/auth/google/sign-in" method="post")
+          input.form-control.my-2(type="text" email="email" placeholder="enter a valid email...")
+          input.form-control.my-2(type="password" name="password" placeholder="enter password...")
+          button.btn.form-control.btn-info(type="submit") submit
+        br
+        h2.text-center or
+        hr
+        p.text-center sign-up with
+        p
+          a.btn.btn-link.btn-danger.text-white.mx-2(href="/auth/google") google
+          a.btn.btn-link.btn-dark.text-white(href="/auth/github") github
+        hr
+        a.btn-link.fas.fa-arrow-left.fa-2x.float-left(href="/" title="go to home")
+
+      

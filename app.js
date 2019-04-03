@@ -1,4 +1,5 @@
 const express = require("express");
+const passport = require("passport");
 const path = require("path");
 const session = require("express-session");
 const flash = require("connect-flash");
@@ -17,16 +18,18 @@ const conn = mongoose.createConnection(db, {
 conn.once("open", () => {
   gfs = Grid(conn.db, mongoose.mongo);
 });
-conn.on('err', (err) => {
-  console.log('MONGO_ERROR:: ', err);
-})
+conn.on("err", err => {
+  console.log("MONGO_ERROR:: ", err);
+});
 
 const app = express();
 /******  MIDDLEWARES ******/
 app.use(express.json());
-app.use(express.urlencoded({
-  extended: false
-}));
+app.use(
+  express.urlencoded({
+    extended: false
+  })
+);
 // use session
 app.use(
   session({
@@ -44,6 +47,10 @@ app.use((req, res, next) => {
   res.locals.error = req.flash("error");
   next();
 });
+// USE PASSPORT;
+app.use(passport.initialize());
+app.use(passport.session());
+require("./config/auth")(passport);
 
 // SET VIEW ENGINE;
 app.set("view engine", "pug");
@@ -51,26 +58,52 @@ app.set("view engine", "pug");
 app.use(express.static(path.resolve(__dirname, "statics")));
 // ================================================================
 // ROUTES
+
+// verify if Auth
+function ensureAuthentication(req, res, next) {
+  if (req.isAuthenticated()) {
+    next()
+  } else {
+    req.flash('failure', 'Unauthorized')
+    res.redirect('/sign-in');
+  }
+}
 // GET-ROUTE
 app.get("/", (req, res, next) => {
-  gfs.files.find().sort({
-    uploadDate: -1
-  }).toArray((err, files) => {
-    res.render("index", {
-      files
+  gfs.files
+    .find()
+    .sort({
+      uploadDate: -1
+    })
+    .toArray((err, files) => {
+      res.render("index", {
+        files
+      });
     });
-  });
 });
-
+/****RENDER SIGNUP */
+app.get("/sign-up", (req, res, next) => {
+  res.render("sign-up");
+});
+/****RENDER SIGNIN */
+app.get("/sign-in", (req, res, next) => {
+  res.render("sign-in");
+});
+/****RENDER ABOUT */
 app.get("/about", (req, res) => {
   res.render("about");
 });
 
-app.get('/images', (req, res) => {
+app.get("/images", (req, res) => {
   gfs.files.find().toArray((err, files) => {
     if (files) {
-      const isImage = files.filter(file => file.contentType === 'image/jpeg' || file.contentType === 'image/jpg' || file.contentType === 'image/png')
-      res.render('image', {
+      const isImage = files.filter(
+        file =>
+        file.contentType === "image/jpeg" ||
+        file.contentType === "image/jpg" ||
+        file.contentType === "image/png"
+      );
+      res.render("image", {
         IMAGES: isImage
       });
     } else {
@@ -80,11 +113,16 @@ app.get('/images', (req, res) => {
     }
   });
 });
-app.get('/videos', (req, res) => {
+app.get("/videos", (req, res) => {
   gfs.files.find().toArray((err, files) => {
     if (files) {
-      const isVideo = files.filter(file => file.contentType === 'video/jpeg' || file.contentType === 'video/mp4' || file.contentType === 'video/mp3')
-      res.render('video', {
+      const isVideo = files.filter(
+        file =>
+        file.contentType === "video/jpeg" ||
+        file.contentType === "video/mp4" ||
+        file.contentType === "video/mp3"
+      );
+      res.render("video", {
         VIDEOS: isVideo
       });
     } else {
@@ -123,10 +161,10 @@ app.get("/detail/:filename", (req, res) => {
     (err, file) => {
       if (err) throw err;
       if (!file) {
-        req.flash('failure', 'file NOT found');
-        res.redirect('/');
+        req.flash("failure", "file NOT found");
+        res.redirect("/");
       } else {
-        res.render('details', {
+        res.render("details", {
           file
         });
       }
@@ -134,6 +172,27 @@ app.get("/detail/:filename", (req, res) => {
   );
 });
 // POST ROUTE;
+
+// GOOGLE_OAUTH
+app.get(
+  "/auth/google",
+  passport.authenticate("google", {
+    scope: ["https://www.googleapis.com/auth/plus.login"]
+  })
+);
+
+app.get(
+  "/auth/google/callback",
+  passport.authenticate("google", {
+    failureRedirect: "/sign-in",
+    failureFlash: true
+  }),
+  (req, res) => {
+    console.log(req.user);
+    console.log(req.user);
+  }
+);
+// ADD
 app.post("/file/add", (req, res, next) => {
   uploads(req, res, err => {
     if (err) {
@@ -141,7 +200,6 @@ app.post("/file/add", (req, res, next) => {
       res.redirect("/add");
     } else {
       if (req.file) {
-        console.log(req.file);
         req.flash("success", "file uploaded");
         res.redirect("/");
       } else {

@@ -2,13 +2,8 @@ const multer = require("multer");
 const mongoose = require("mongoose");
 const path = require("path");
 const gridFsStorage = require("multer-gridfs-storage");
-const db = require("./db").mongoURI;
+const url = require("./db").mongoURI;
 
-const url = mongoose.connect(db, {
-    useNewUrlParser: true
-  })
-  .then(() => console.log('GFS store connected...'))
-  .catch(err => console.log(err));
 // CREATE STORAGE ENGINE
 const storage = new gridFsStorage({
   url,
