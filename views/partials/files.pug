@@ -1,32 +1,34 @@
 if files
         
         h2.btn.btn-block.btn-sm.bg-danger.my-2.text-uppercase.mr-auto.text-white(style="width:70%") available
-        .row  
+        .row
                 each file, i in files
-                        .col-sm-6.col-md-4.col-lg-3.my-1
+                        .col-sm-6.col-md-4.col-lg-3#Home_Card
                                 .card
                                         if file.contentType === 'image/jpeg' || file.contentType === 'image/jpg' || file.contentType === 'image/png'
-                                                a.link(href="/detail/"+file.filename)
+                                                a.nav-link.p-0(href="/detail/"+file.filename)
                                                         img.m-auto.card-img-top(src = `/image/${file.filename}` style="width: 100%;")
-                                                .row
-                                                        .col-lg-4.col-md-4.col-sm-4
-                                                                a.nav-link.fas.fa-download.text-secondary(href=`${file.filename}` downloadable)
-                                                        .col-sm-4.co.col-md-4.col-lg-4
-                                                                a.nav-link.fas.fa-share.text-warning(href=`/share/${file.filename}`)
-                                                        .col-lg-4.col-md-4.col-sm-4
-                                                                a.nav-link.fas.fa-heart.text-danger(href=`/like/${file._id}`)
+                                                .card-footer.border-0
+                                                        .row
+                                                                .col-lg-4.col-md-4.col-sm-4
+                                                                        a.nav-link.fas.fa-download.text-secondary(href=`${file.filename}` downloadable)
+                                                                .col-sm-4.co.col-md-4.col-lg-4
+                                                                        a.nav-link.fas.fa-share.text-warning(href=`/share/${file.filename}`)
+                                                                .col-lg-4.col-md-4.col-sm-4
+                                                                        a.nav-link.fas.fa-heart.text-danger(href=`/like/${file._id}`)
                         
                                         if file.contentType === 'video/mp4' || file.contentType === 'video/mp3'
                                                 a.nav-link.p-0(href="/detail/"+file.filename)
                                                         video.m-auto.card-img-top(autoplay controls muted)
-                                                                source(src = `/image/${file.filename}` type=`${file.contentType}`) 
-                                                .row
-                                                        .col-lg-3.m-auto.col-md-3.m-auto.col-sm-3.m-auto
-                                                                a.nav-link.fas.fa-download.text-secondary(href=`/image/${file.filename}` downloadable)
-                                                        .col-lg-3.m-auto.col-md-3.m-auto.col-sm-3.m-auto
-                                                                a.nav-link.fas.fa-share.text-warning(href=`/detail/${file.filename}`)
-                                                        .col-lg-3.m-auto.col-md-3.m-auto.col-sm-3.m-auto
-                                                                a.nav-link.fas.fa-heart.text-danger(href=`/detail/${file.filename}`)
+                                                                source(src = `/image/${file.filename}` type=`${file.contentType}`)
+                                                .card-footer.border-0
+                                                        .row
+                                                                .col-lg-3.m-auto.col-md-3.m-auto.col-sm-3.m-auto
+                                                                        a.nav-link.fas.fa-download.text-secondary(href=`/image/${file.filename}` downloadable)
+                                                                .col-lg-3.m-auto.col-md-3.m-auto.col-sm-3.m-auto
+                                                                        a.nav-link.fas.fa-share.text-warning(href=`/detail/${file.filename}`)
+                                                                .col-lg-3.m-auto.col-md-3.m-auto.col-sm-3.m-auto
+                                                                        a.nav-link.fas.fa-heart.text-danger(href=`/detail/${file.filename}`)
 
 if !files.length
         h2.m-auto
