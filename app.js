@@ -51,15 +51,12 @@ app.use((req, res, next) => {
 app.use(passport.initialize());
 app.use(passport.session());
 require("./config/auth")(passport);
-require("./config/auth_github")(passport);
-
 // SET VIEW ENGINE;
 app.set("view engine", "pug");
 // SET STATIC ASSET
 app.use(express.static(path.resolve(__dirname, "statics")));
 // ================================================================
 // ROUTES
-
 // verify if Auth
 function ensureAuthentication(req, res, next) {
   if (req.isAuthenticated()) {
@@ -70,7 +67,7 @@ function ensureAuthentication(req, res, next) {
   }
 }
 // GET-ROUTE
-app.get("/", (req, res, next) => {
+app.get("/", ensureAuthentication, (req, res, next) => {
   gfs.files
     .find()
     .sort({
