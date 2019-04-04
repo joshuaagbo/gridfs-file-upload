@@ -51,6 +51,7 @@ app.use((req, res, next) => {
 app.use(passport.initialize());
 app.use(passport.session());
 require("./config/auth")(passport);
+require("./config/auth_github")(passport);
 
 // SET VIEW ENGINE;
 app.set("view engine", "pug");
