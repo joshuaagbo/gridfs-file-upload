@@ -7,7 +7,7 @@ if files
                                 .card
                                         if file.contentType === 'image/jpeg' || file.contentType === 'image/jpg' || file.contentType === 'image/png'
                                                 a.link(href="/detail/"+file.filename)
-                                                        img.m-auto.card-img-top(src = `/image/${file.filename}` style="width: 100%;")
+                                                        img.m-auto.card-img-top(src = `/file/${file.filename}` style="width: 100%;")
                                                 .row
                                                         .col-lg-4.col-md-4.col-sm-4
                                                                 a.nav-link.fas.fa-download.text-secondary(href=`${file.filename}` downloadable)
@@ -19,7 +19,7 @@ if files
                                         if file.contentType === 'video/mp4' || file.contentType === 'video/mp3'
                                                 a.nav-link.p-0(href="/detail/"+file.filename)
                                                         video.m-auto.card-img-top(autoplay controls muted)
-                                                                source(src = `/image/${file.filename}` type=`${file.contentType}`) 
+                                                                source(src = `/file/${file.filename}` type=`${file.contentType}`) 
                                                 .row
                                                         .col-lg-3.m-auto.col-md-3.m-auto.col-sm-3.m-auto
                                                                 a.nav-link.fas.fa-download.text-secondary(href=`/image/${file.filename}` downloadable)

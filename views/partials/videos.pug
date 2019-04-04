@@ -13,7 +13,7 @@ if VIDEOS
         .card
           a.nav-link(href="/detail/"+video.filename)
             video.card-img(autoplay controls muted)
-              source(src=`/image/${video.filename}` type =`${video.contentType}`)
+              source(src=`/file/${video.filename}` type =`${video.contentType}`)
           .row
             .col-lg-4.col-md-4.col-sm-4
               a.nav-link.fas.fa-download.text-secondary(href=`${video.filename}` downloadable)

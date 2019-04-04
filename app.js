@@ -137,7 +137,7 @@ app.get("/add", (req, res) => {
   res.render("add");
 });
 
-app.get("/image/:filename", (req, res, next) => {
+app.get("/file/:filename", (req, res, next) => {
   gfs.files.findOne({
       filename: req.params.filename
     },
@@ -173,23 +173,19 @@ app.get("/detail/:filename", (req, res) => {
 });
 // POST ROUTE;
 
-// GOOGLE_OAUTH
+// KICK_START GOOGLE_OAUTH
 app.get(
   "/auth/google",
   passport.authenticate("google", {
-    scope: ["https://www.googleapis.com/auth/plus.login"]
+    scope: ['profile']
   })
 );
-
+// GOOGLE_AUTH_CB
 app.get(
   "/auth/google/callback",
-  passport.authenticate("google", {
-    failureRedirect: "/sign-in",
-    failureFlash: true
-  }),
+  passport.authenticate("google"),
   (req, res) => {
-    console.log(req.user);
-    console.log(req.user);
+    //NEXT function
   }
 );
 // ADD
