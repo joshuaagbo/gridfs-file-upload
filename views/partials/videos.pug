@@ -13,17 +13,6 @@ if VIDEOS
         .card
           a.nav-link(href="/detail/"+video.filename)
             video.card-img(autoplay controls muted)
-<<<<<<< HEAD
-              source(src=`/image/${video.filename}` type =`${video.contentType}`)
-          .card-footer.border-0
-            .row
-              .col-lg-4.col-md-4.col-sm-4
-                a.nav-link.fas.fa-download.text-secondary(href=`${video.filename}` downloadable)
-              .col-sm-4.co.col-md-4.col-lg-4
-                a.nav-link.fas.fa-share.text-warning(href=`/share/${video.filename}`)
-              .col-lg-4.col-md-4.col-sm-4
-                a.nav-link.fas.fa-heart.text-danger(href=`/like/${video._id}`)
-=======
               source(src=`/file/${video.filename}` type =`${video.contentType}`)
           .row
             .col-lg-4.col-md-4.col-sm-4
@@ -32,7 +21,6 @@ if VIDEOS
               a.nav-link.fas.fa-share.text-warning(href=`/share/${video.filename}`)
             .col-lg-4.col-md-4.col-sm-4
               a.nav-link.fas.fa-heart.text-danger(href=`/like/${video._id}`)
->>>>>>> auth
       
 if !VIDEOS
   p

@@ -21,13 +21,14 @@ if files
                                                 a.nav-link.p-0(href="/detail/"+file.filename)
                                                         video.m-auto.card-img-top(autoplay controls muted)
                                                                 source(src = `/file/${file.filename}` type=`${file.contentType}`) 
-                                                .row
-                                                        .col-lg-3.m-auto.col-md-3.m-auto.col-sm-3.m-auto
-                                                                a.nav-link.fas.fa-download.text-secondary(href=`/image/${file.filename}` downloadable)
-                                                        .col-lg-3.m-auto.col-md-3.m-auto.col-sm-3.m-auto
-                                                                a.nav-link.fas.fa-share.text-warning(href=`/detail/${file.filename}`)
-                                                        .col-lg-3.m-auto.col-md-3.m-auto.col-sm-3.m-auto
-                                                                a.nav-link.fas.fa-heart.text-danger(href=`/detail/${file.filename}`)
+                                                .card-footer.p-0
+                                                        .row
+                                                                .col-lg-3.m-auto.col-md-3.m-auto.col-sm-3.m-auto
+                                                                        a.nav-link.fas.fa-download.text-secondary(href=`/image/${file.filename}` downloadable)
+                                                                .col-lg-3.m-auto.col-md-3.m-auto.col-sm-3.m-auto
+                                                                        a.nav-link.fas.fa-share.text-warning(href=`/detail/${file.filename}`)
+                                                                .col-lg-3.m-auto.col-md-3.m-auto.col-sm-3.m-auto
+                                                                        a.nav-link.fas.fa-heart.text-danger(href=`/detail/${file.filename}`)
 
 if !files.length
         h2.m-auto
