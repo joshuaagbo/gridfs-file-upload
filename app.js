@@ -49,7 +49,6 @@ app.use((req, res, next) => {
 app.use(passport.initialize());
 app.use(passport.session());
 require("./config/auth")(passport);
-
 // SET VIEW ENGINE;
 app.set("view engine", "pug");
 // SET STATIC ASSET

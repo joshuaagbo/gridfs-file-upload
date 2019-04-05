@@ -8,11 +8,12 @@ const {
 
 module.exports = (passport) => {
   passport.use(new GoogleStrategy({
-      clientID: google.GOOGLE_CIENT_SECRET,
-      clientSecret: google.GOOGLE_CIENT_SECRET,
-      callbackURL: '/auth/google/callback',
+      clientID: google.GOOGLE_CLIENT_SECRET,
+      clientSecret: google.GOOGLE_CLIENT_SECRET,
+      callbackURL: 'http://localhost:4300/auth/google/callback',
     },
     (accessToken, refreshToken, profile, done) => {
       console.log(profile);
+      // done(profile);
     }));
 };
