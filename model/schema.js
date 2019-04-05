@@ -5,7 +5,7 @@ const userSchema = Schema({
   username: {
     type: String
   },
-  provd_Id: {
+  providerId: {
     type: String
   },
   provider: {

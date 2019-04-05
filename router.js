@@ -1,16 +1,23 @@
 const express = require('express');
 const router = express.Router();
 const passport = require('passport');
+const Grid = require("gridfs-stream");
+const dburl = require('./config/db').mongoURI;
+const mongoose = require('mongoose');
+const authGithub = require('./config/auth_github')(passport);
 const {
   uploads
 } = require("./config/multer_storage");
-const {
-  gfs
-} = require('./config/grid');
+// GFS CONFIG
 
+let gfs;
+const conn = mongoose.createConnection(dburl);
+conn.once('open', () => {
+  gfs = Grid(conn.db, mongoose.mongo);
+});
 // ================================================================
 // ROUTES
-// verify if Auth
+// verify Auth
 function ensureAuthentication(req, res, next) {
   if (req.isAuthenticated()) {
     next()
@@ -28,7 +35,8 @@ router.get("/", (req, res, next) => {
     })
     .toArray((err, files) => {
       res.render("index", {
-        files
+        files,
+        user: req.user
       });
     });
 });
@@ -84,7 +92,7 @@ router.get("/videos", (req, res) => {
   });
 });
 
-router.get("/add", (req, res) => {
+router.get("/add", ensureAuthentication, (req, res) => {
   res.render("add");
 });
 
@@ -123,7 +131,6 @@ router.get("/detail/:filename", (req, res) => {
   );
 });
 // POST ROUTE;
-
 // KICK_START GOOGLE_OAUTH
 router.get(
   "/auth/google",
@@ -134,11 +141,38 @@ router.get(
 // GOOGLE_AUTH_CB
 router.get(
   "/auth/google/callback",
-  passport.authenticate("google"),
+  passport.authenticate("google", {
+    failureFlash: true,
+    failureRedirect: '/sign-in'
+  }),
   (req, res) => {
-    //NEXT function
-  }
+    if (req.user) {
+      req.flash('success', 'Now Authenticated');
+      res.redirect('/');
+    }
+
+  });
+// KICK_START GITHUB_OAUTH
+router.get(
+  "/auth/github",
+  passport.authenticate("github", {
+    scope: ['profile']
+  })
 );
+// GITHUB_AUTH_CB
+router.get(
+  "/auth/github/callback",
+  passport.authenticate("github", {
+    failureFlash: true,
+    failureRedirect: '/sign-in'
+  }),
+  (req, res) => {
+    if (req.user) {
+      req.flash('success', 'Now Authenticated');
+      res.redirect('/');
+    }
+
+  });
 // ADD
 router.post("/file/add", (req, res, next) => {
   uploads(req, res, err => {

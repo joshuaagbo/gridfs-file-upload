@@ -1,6 +1,16 @@
 if  failure != ''
-    .alert.alert-dismissible.alert-danger.mt-3.text-center.fade.show #{failure}
+    .alert.alert-dismissible.alert-danger.mt-3.text-center.fade.show
+        span.fas.fa-exclamation-triangle.float-left.text-danger.fa-2x 
+        span.text-danger #{failure}
         button.close(data-dismiss ="alert") &times;
 if success != ''
-    .alert.alert-dismissible.alert-success.m-auto.text-center.fade.show #{success}
+    .alert.alert-dismissible.alert-success.m-auto.text-center.fade.show
+        span.fas.fa-check-circle.float-left.text-success.fa-2x 
+        span #{success}
+        button.close(data-dismiss = "alert") &times;
+
+if error != ''
+    .alert.alert-dismissible.alert-danger.m-auto.text-center.fade.show 
+        span.fas.fa-exclamation-triangle.float-left.text-danger.fa-2x 
+        span.text-danger #{error}
         button.close(data-dismiss = "alert") &times;

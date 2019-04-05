@@ -5,8 +5,15 @@ const session = require("express-session");
 const flash = require("connect-flash");
 const port = process.env.PORT || 4300;
 const router = require('./router');
+const mongoose = require('mongoose');
+const db = require('./config/db').mongoURI;
 
 const app = express();
+mongoose.connect(db, {
+    useNewUrlParser: true
+  })
+  .then(() => console.log('Db connected'))
+  .catch(err => console.log('NEW_MONGO_ERROR::', err));
 /******  MIDDLEWARES ******/
 app.use(express.json());
 app.use(

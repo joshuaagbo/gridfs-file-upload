@@ -18,4 +18,8 @@
                 if user
                     li.nav-item
                         a.nav-link.text-capitalize(href ="/user/"+user._id) #{user.username}
-
+                if !user
+                    li.nav-item
+                        a.nav-link.text-capitalize.text-info(href="/sign-up") sign-up
+                    li.nav-item
+                        a.nav-link.text-capitalize.text-success(href="/sign-in") sign-in
