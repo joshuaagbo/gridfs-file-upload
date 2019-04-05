@@ -4,21 +4,7 @@ const path = require("path");
 const session = require("express-session");
 const flash = require("connect-flash");
 const port = process.env.PORT || 4300;
-const Grid = require("gridfs-stream");
-const mongoose = require("mongoose");
-const db = require("./config/db").mongoURI;
 const router = require('./router');
-
-let gfs;
-const conn = mongoose.createConnection(db, {
-  useNewUrlParser: true
-});
-conn.once("open", () => {
-  gfs = Grid(conn.db, mongoose.mongo);
-});
-conn.on("err", err => {
-  console.log("MONGO_ERROR:: ", err);
-});
 
 const app = express();
 /******  MIDDLEWARES ******/

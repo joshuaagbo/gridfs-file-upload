@@ -8,9 +8,9 @@ const {
 
 module.exports = (passport) => {
   passport.use(new GoogleStrategy({
-      clientID: google.GOOGLE_CLIENT_SECRET,
+      clientID: google.GOOGLE_CLIENT_ID,
       clientSecret: google.GOOGLE_CLIENT_SECRET,
-      callbackURL: 'http://localhost:4300/auth/google/callback',
+      callbackURL: 'http://localhost:4300',
     },
     (accessToken, refreshToken, profile, done) => {
       console.log(profile);

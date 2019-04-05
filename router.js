@@ -4,6 +4,10 @@ const passport = require('passport');
 const {
   uploads
 } = require("./config/multer_storage");
+const {
+  gfs
+} = require('./config/grid');
+
 // ================================================================
 // ROUTES
 // verify if Auth
