@@ -13,8 +13,7 @@ const storage = new gridFsStorage({
     return {
       filename: `${file.fieldname}_${new Date().getTime()} ${path.extname(
         file.originalname
-      )}`,
-      bucketName: process.env == 'production' ? 'uploads' : null
+      )}`
     };
   }
 });
