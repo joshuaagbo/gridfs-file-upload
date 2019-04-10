@@ -1,6 +1,6 @@
 if IMAGES
   h2.btn.btn-block.bg-dark.text-white.mt-2
-    a.nav-link.text-white.fas.fa-arrow-left.float-left(href="/") Home
+    a.nav-link.text-white.fas.fa-arrow-alt-circle-left.fa-2x.float-left(href="/" title="go to home")
     span.display-4 Trending
       span.fas.fa-fire.text-danger
     a.nav-link.text-white.fas.fa-gallary-o.float-right(href="/videos") Video
@@ -13,8 +13,11 @@ if IMAGES
           .card-footer
             .row
               .col-lg-4.col-md-4.col-sm-4
-                a.nav-link.fas.fa-download.text-secondary(href=`${image.filename}` downloadable)
+                a.nav-link.fas.fa-download.text-secondary(href=`/file/${image.filename}` downloadeable)
               .col-sm-4.co.col-md-4.col-lg-4
-                a.nav-link.fas.fa-share.text-warning(href=`/share/${image.filename}`)
+                a.nav-link.fas.fa-share.text-warning(href=`/detail/${image.filename}`)
               .col-lg-4.col-md-4.col-sm-4
-                a.nav-link.fas.fa-heart.text-danger(href=`/like/${image._id}`)
+                a.nav-link.fas.fa-heart.text-danger(href=`/detail/${image._id}`)
+if !IMAGES.length
+  p.text-center.p-2
+    em Currently no image available

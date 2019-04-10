@@ -7,7 +7,7 @@ block content
         .col-sm-10.col-md-8.col-lg-6.m-auto
           .card
             if file.contentType === "image/png" || file.contentType ==="image/jpeg" || file.contentType === "image/jpg"
-              img.card-img-top(src=`/image/${file.filename}`)
+              img.card-img-top(src=`/file/${file.filename}`)
             if file.contentType === 'video/mp3' || file.contentType === 'video/mp4'
               video.card-img-top(controls autoplay)
-                source(src=`/image/${file.filename}`)
+                source(src=`/file/${file.filename}`)

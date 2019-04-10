@@ -18,21 +18,21 @@ module.exports = (passport) => {
           providerId: profile.id
         })
         .then(user => {
-          if (user) {
-            return done(null, false, {
-              message: 'Email already registered'
-            });
-          } else {
+          if (!user) {
             // CREATE NEW USER Nd SAVE
             new User({
                 username: profile.displayName,
                 provider: profile.provider,
-                providerId: profile.id
-              }).save()
+                providerId: profile.id,
+                avatar: profile._json.picture
+              })
+              .save()
               .then((user) => {
                 return done(null, user);
               })
               .catch(err => done(err, null));
+          } else {
+            return done(null, user);
           }
         })
 

@@ -10,6 +10,9 @@ const userSchema = Schema({
   },
   provider: {
     type: String
+  },
+  avatar: {
+    type: String
   }
 });
 

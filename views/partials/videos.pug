@@ -1,11 +1,11 @@
 if VIDEOS
   h2.btn.btn-block.bg-dark.text-white.mt-2 
-    a.nav-link.fas.fa-arrow-left.text-center.float-left(href="/") Home
+    a.nav-link.fas.fa-arrow-alt-circle-left.fa-2x.text-white.float-left(href="/")
     span.display-4
       span.fas.fa-fire.text-danger
       span Latest Videos
       span.fas.fa-fire.text-danger
-    a.nav-link.fas.fa-gallary-o.float-right(href="/images") Photos
+    a.nav-link.fas.fa-gallary-o.float-right.text-white(href="/images") Photos
     .clearfix
   .row.mt-3
     for video, i in VIDEOS
@@ -17,12 +17,12 @@ if VIDEOS
           .card-footer
             .row
               .col-lg-4.col-md-4.col-sm-4
-                a.nav-link.fas.fa-download.text-secondary(href=`${video.filename}` downloadable)
+                a.nav-link.fas.fa-download.text-secondary(href=`/file/${video.filename}` downloadeable)
               .col-sm-4.co.col-md-4.col-lg-4
-                a.nav-link.fas.fa-share.text-warning(href=`/share/${video.filename}`)
+                a.nav-link.fas.fa-share.text-warning(href=`/detail/${video.filename}`)
               .col-lg-4.col-md-4.col-sm-4
-                a.nav-link.fas.fa-heart.text-danger(href=`/like/${video._id}`)
+                a.nav-link.fas.fa-heart.text-danger(href=`/detail/${video._id}`)
       
-if !VIDEOS
-  p
-    em No video available
+if !VIDEOS.length
+  p.text-center.p-2
+    em Currently no videos available

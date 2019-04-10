@@ -1,4 +1,4 @@
-if files
+if files.length
         
         h2.btn.btn-block.btn-sm.bg-danger.my-2.text-uppercase.mr-auto.text-white(style="width:70%") available
         .row
@@ -11,11 +11,11 @@ if files
                                                 .card-footer.border-0
                                                         .row
                                                                 .col-lg-4.col-md-4.col-sm-4
-                                                                        a.nav-link.fas.fa-download.text-secondary(href=`${file.filename}` downloadable)
+                                                                        a.nav-link.fas.fa-download.text-secondary(href=`/file/${file.filename}` downloadeable)
                                                                 .col-sm-4.co.col-md-4.col-lg-4
-                                                                        a.nav-link.fas.fa-share.text-warning(href=`/share/${file.filename}`)
+                                                                        a.nav-link.fas.fa-share.text-warning(href=`/detail/${file.filename}`)
                                                                 .col-lg-4.col-md-4.col-sm-4
-                                                                        a.nav-link.fas.fa-heart.text-danger(href=`/like/${file._id}`)
+                                                                        a.nav-link.fas.fa-heart.text-danger(href=`/detail/${file._id}`)
                         
                                         if file.contentType === 'video/mp4' || file.contentType === 'video/mp3'
                                                 a.nav-link.p-0(href="/detail/"+file.filename)
@@ -24,12 +24,16 @@ if files
                                                 .card-footer.p-0
                                                         .row
                                                                 .col-lg-3.m-auto.col-md-3.m-auto.col-sm-3.m-auto
-                                                                        a.nav-link.fas.fa-download.text-secondary(href=`/image/${file.filename}` downloadable)
+                                                                        a.nav-link.fas.fa-download.text-secondary(href=`/file/${file.filename}` downloadeable)
                                                                 .col-lg-3.m-auto.col-md-3.m-auto.col-sm-3.m-auto
                                                                         a.nav-link.fas.fa-share.text-warning(href=`/detail/${file.filename}`)
                                                                 .col-lg-3.m-auto.col-md-3.m-auto.col-sm-3.m-auto
                                                                         a.nav-link.fas.fa-heart.text-danger(href=`/detail/${file.filename}`)
 
 if !files.length
-        h2.m-auto
-                em No Available image
+        h2.m-auto.text-center.p-3
+                em No file available, 
+                if user
+                        em click add to add file
+                if !user
+                        em plz sign-in to add file

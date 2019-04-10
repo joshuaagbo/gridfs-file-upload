@@ -1,0 +1,33 @@
+extends layout
+block content
+  .container
+    .nav.flex-column.sticky-top.float-left.navbar-inline.mt-3
+      span Follow On:
+      a.fab.fa-google.nav-link.fa-2x.text-danger(href="http://www.google.com/therealgemjosh" target="self")
+      a.fab.fa-facebook.nav-link.fa-2x.text-primary(href="https://web.facebook.com/gem.josh.9" target="self")
+      a.fab.fa-instagram.nav-link.fa-2x.text-danger(href="http://www.instagram.com/gems_dev" target="self")
+      a.fab.fa-github.nav-link.fa-2x.text-dark(href="http://github.com/therealgemjosh" target="self")
+    .nav.sticky-top.float-right.flex-column
+      a.nav-link.text-info.text-capitalize.fas.fa-home.fa-2x(href="/")
+      a.nav-link.text-danger.text-capitalize(href="/videos") videos
+      a.nav-link.text-danger.text-capitalize(href="/images") images
+      a.nav-link.text-danger.text-capitalize(href="/sign-out") signout
+    .row
+      .col-sm-10.col-md-10.col-lg-6.m-auto
+        .card.mx-auto.mt-3(style="background: #111;opacity:.9;background-image:url("+user.avatar+");background-size: cover;repeat:none;")
+          if user
+            .container.border-0.mt-2.mx-auto(style="width: 50%")
+              img.card-img.m-auto(src= `${user.avatar}` style="width: 100;height:100;border-radius:50%;display: block")
+            .card-body.mt-0
+              .container
+                list-group
+                  .list-group-item.mb-1
+                    span.fas.fa-user.fa-2x.text-info 
+                    strong  Username
+                    span.float-right.text-info #{user.username}
+                .list-group-item 
+                    span.fas.fa-vote-yea.fa-2x.text-info 
+                    strong  0Auth provider
+                    span.float-right.text-info #{user.provider}
+    .navbar.sticky-bottom
+     p copyright &copy; gems     

@@ -7,8 +7,9 @@
             span.navbar-toggler-icon
         .collapse.navbar-collapse#collapseMenu
             ul.navbar-nav.float-right.ml-auto
-                li.nav-item
-                    a.nav-link.text-capitalize(href ="/add") add               
+                if user
+                    li.nav-item
+                        a.nav-link.text-capitalize(href ="/add") add               
                 li.nav-item
                     a.nav-link.text-capitalize(href ="/images") image
                 li.nav-item
@@ -17,9 +18,13 @@
                     a.nav-link.text-capitalize(href ="/about") about
                 if user
                     li.nav-item
-                        a.nav-link.text-capitalize(href ="/user/"+user._id) #{user.username}
+                        a.nav-link.text-capitalize(href ="/user/profile/"+user._id)
+                            img.card-img(src=`${user.avatar}` style="width:25;height:25;border-radius:50%" title="profile")
+                if user
+                    li.nav-item
+                        a.nav-link.text-danger(href ="/logout") Signout
                 if !user
                     li.nav-item
-                        a.nav-link.text-capitalize.text-info(href="/sign-up") sign-up
+                        a.nav-link.text-capitalize.text-info(href="/sign-in") sign-up
                     li.nav-item
                         a.nav-link.text-capitalize.text-success(href="/sign-in") sign-in

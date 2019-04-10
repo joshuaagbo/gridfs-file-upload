@@ -18,22 +18,23 @@ module.exports = (passport) => {
           providerId: profile.id
         })
         .then(user => {
-          if (user) {
-            return done(null, false, {
-              message: 'This email is already used'
-            });
-          } else {
+          if (!user) {
             // CREATE NEW USER Nd SAVE
             new User({
                 username: profile.displayName,
                 provider: profile.provider,
-                providerId: profile.id
+                providerId: profile.id,
+                avatar: profile._json.avatar_url
               })
               .save()
               .then((user) => {
                 return done(null, user);
               })
               .catch(err => done(err, null));
+
+          } else {
+            // return user
+            return done(null, user);
           }
         })
     }));
