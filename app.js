@@ -3,8 +3,8 @@ const passport = require("passport");
 const path = require("path");
 const session = require("express-session");
 const flash = require("connect-flash");
-const port = process.env.PORT || 4300;
 const router = require("./router");
+const port = require('./port');
 const mongoose = require("mongoose");
 const {
   mongoURI
